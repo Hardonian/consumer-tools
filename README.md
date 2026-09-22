@@ -73,6 +73,29 @@ pnpm -r test
 pnpm -r build
 ```
 
+## Related Repos
+
+### Hardonia Monorepos
+
+| Repo | Purpose |
+|------|---------|
+| [autopilot](https://github.com/Hardonian/autopilot) | Autonomous agent orchestration |
+| [agent-infra](https://github.com/Hardonian/agent-infra) | Agent infrastructure and runtime |
+| [agent-edge](https://github.com/Hardonian/agent-edge) | Edge-deployed agent runtimes |
+| [model-tools](https://github.com/Hardonian/model-tools) | Model management, evaluation, deployment |
+| [api-tools](https://github.com/Hardonian/api-tools) | ComfyUI API gateway, webhook capture, changelog tracking |
+| [ops-tools](https://github.com/Hardonian/ops-tools) | Continuity assurance, Terraform drift, developer platform |
+
+### Commercial Repos
+
+| Repo | Purpose |
+|------|---------|
+| [hardonia-store](https://github.com/Hardonian/hardonia-store) | Hardonia storefront |
+| [comfyui-workflow-packs](https://github.com/Hardonian/comfyui-workflow-packs) | ComfyUI workflow packages |
+| [content-repo](https://github.com/Hardonian/content-repo) | Content assets |
+| [ai-prompt-templates](https://github.com/Hardonian/ai-prompt-templates) | AI prompt templates |
+| [ai-ops-toolkit](https://github.com/Hardonian/ai-ops-toolkit) | AI operations toolkit |
+
 ## License
 
 Each module retains its own license. See individual `LICENSE` files.
