@@ -1,0 +1,103 @@
+import type { ScanRunWithCandidates, SenderCandidate } from "./domain.ts";
+import { newId, nowIso } from "./ids.ts";
+
+export function getDemoScan(): ScanRunWithCandidates {
+  const userId = "demo-user";
+  const scanRunId = "demo-scan-123";
+  const now = nowIso();
+
+  const candidates: SenderCandidate[] = [
+    {
+      id: newId("sender"),
+      scanRunId,
+      userId,
+      senderDomain: "newsletter.uber.com",
+      senderDisplayName: "Uber",
+      classification: "PROMOTIONAL_HIGH_CONFIDENCE",
+      score: 92,
+      reasons: ["Bulk sender headers detected", "High frequency (weekly)", "Marketing category"],
+      messageCount: 14,
+      proposedAction: "QUIET_BY_FILTER",
+      selectedByDefault: true,
+      unsubscribeMethods: ["https"],
+      createdAt: now,
+    },
+    {
+      id: newId("sender"),
+      scanRunId,
+      userId,
+      senderDomain: "offers.doordash.com",
+      senderDisplayName: "DoorDash",
+      classification: "PROMOTIONAL_HIGH_CONFIDENCE",
+      score: 88,
+      reasons: ["Promotional keywords found", "List-Unsubscribe header present"],
+      messageCount: 8,
+      proposedAction: "QUIET_BY_FILTER",
+      selectedByDefault: true,
+      unsubscribeMethods: ["https", "mailto"],
+      createdAt: now,
+    },
+    {
+      id: newId("sender"),
+      scanRunId,
+      userId,
+      senderDomain: "hello.robinhood.com",
+      senderDisplayName: "Robinhood",
+      classification: "FINANCIAL_SAFE_SKIP",
+      score: 15,
+      reasons: ["Financial service detected", "Potential sensitive transaction"],
+      messageCount: 3,
+      proposedAction: "SKIP",
+      selectedByDefault: false,
+      unsubscribeMethods: ["https"],
+      protectedReason: "Financial data protection rule",
+      createdAt: now,
+    },
+    {
+      id: newId("sender"),
+      scanRunId,
+      userId,
+      senderDomain: "marketing.medium.com",
+      senderDisplayName: "Medium Daily Digest",
+      classification: "NEWSLETTER_HIGH_CONFIDENCE",
+      score: 85,
+      reasons: ["Newsletter pattern matched", "High volume"],
+      messageCount: 30,
+      proposedAction: "QUIET_BY_FILTER",
+      selectedByDefault: true,
+      unsubscribeMethods: ["https"],
+      createdAt: now,
+    },
+    {
+      id: newId("sender"),
+      scanRunId,
+      userId,
+      senderDomain: "amazon.com",
+      senderDisplayName: "Amazon.com",
+      classification: "TRANSACTIONAL_SAFE_SKIP",
+      score: 10,
+      reasons: ["Transactional sender (Receipts/Orders)"],
+      messageCount: 12,
+      proposedAction: "SKIP",
+      selectedByDefault: false,
+      unsubscribeMethods: [],
+      protectedReason: "Transactional safety rule",
+      createdAt: now,
+    },
+  ];
+
+  return {
+    id: scanRunId,
+    userId,
+    status: "completed",
+    query: "newer_than:90d (category:promotions OR list:* OR unsubscribe) -from:me",
+    messageCount: 247,
+    candidateCount: candidates.length,
+    selectedCount: candidates.filter(c => c.selectedByDefault).length,
+    skippedCount: candidates.filter(c => c.proposedAction === "SKIP").length,
+    degraded: false,
+    startedAt: now,
+    finishedAt: now,
+    candidates,
+  };
+}

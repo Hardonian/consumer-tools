@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-04-30T00:20:00Z",
+  "cases": [
+    {
+      "id": "EC_OTP_001",
+      "scenario": "Authentication codes from low-reputation senders",
+      "criteria": "Subject contains ('code', 'otp', 'verification') AND (body contains digits OR has_attachment=false)",
+      "logic_type": "heuristic",
+      "action": "elevate_priority",
+      "description": "Ensures login codes are never delayed even if the sender is unknown or generic."
+    },
+    {
+      "id": "EC_CANCEL_001",
+      "scenario": "Subscription cancellation confirmation",
+      "criteria": "Subject contains ('cancelled', 'subscription', 'deactivated') AND sender is known service",
+      "logic_type": "pattern_match",
+      "action": "bypass_classification",
+      "description": "Crucial to keep as proof of service termination to avoid unwanted charges."
+    },
+    {
+      "id": "EC_REPLY_001",
+      "scenario": "Personal thread from promotional domain",
+      "criteria": "Header 'In-Reply-To' exists OR subject starts with 'Re:'",
+      "logic_type": "header_check",
+      "action": "whitelist",
+      "description": "Prevents personal conversations from being junked just because they originate from a domain like 'linkedin.com' or 'gmail.com'."
+    },
+    {
+      "id": "EC_CAL_001",
+      "scenario": "Meeting invitations",
+      "criteria": "Has attachment with '.ics' extension OR contains 'calendar invite'",
+      "logic_type": "attachment_analysis",
+      "action": "bypass_classification",
+      "description": "Protects time-sensitive meeting requests."
+    },
+    {
+      "id": "EC_BILL_FAIL_001",
+      "scenario": "Payment failed for critical service",
+      "criteria": "Subject contains ('payment failed', 'declined', 'action required', 'update payment') AND sender in infrastructure_list",
+      "logic_type": "conditional_boost",
+      "action": "FORCE_KEEP",
+      "description": "Prevents service interruption for critical tools (SaaS, hosting, utilities)."
+    },
+    {
+      "id": "EC_GIFT_001",
+      "scenario": "Digital gift card delivery",
+      "criteria": "Subject contains ('gift card', 'egift', 'reward') AND sender is reputable retailer",
+      "logic_type": "score_neutral",
+      "action": "protect",
+      "description": "Digital assets shouldn't be lost in promotional filters."
+    },
+    {
+      "id": "EC_SHIP_UPDATE_001",
+      "scenario": "Shipping status change from 'order' to 'delivered'",
+      "criteria": "Subject contains ('shipped', 'delivered', 'out for delivery') AND previous_state='confirmed'",
+      "logic_type": "state_machine",
+      "action": "elevate_priority",
+      "description": "Transactional updates for physically arriving items should be tracked."
+    },
+    {
+      "id": "EC_SUPPORT_THREAD_001",
+      "scenario": "Ongoing support ticket correspondence",
+      "criteria": "Subject contains bracketed ID like '[#12345]' OR sender contains 'support'",
+      "logic_type": "regex_match",
+      "action": "whitelist",
+      "description": "Active support tickets are high priority regardless of domain score."
+    },
+    {
+      "id": "EC_FEEDBACK_CRIT_001",
+      "scenario": "Post-support satisfaction survey",
+      "criteria": "Received within 24h of a 'support' interaction",
+      "logic_type": "temporal_correlation",
+      "action": "allow",
+      "description": "While surveys are usually promotional, those linked to recent support are relevant for service quality."
+    },
+    {
+      "id": "EC_WAITLIST_001",
+      "scenario": "Beta access or waitlist invite",
+      "criteria": "Subject contains ('you're in', 'beta access', 'waitlist update', 'early access')",
+      "logic_type": "keyword_boost",
+      "action": "allow",
+      "description": "High-value promotional-style invites that the user specifically requested."
+    }
+  ]
+}

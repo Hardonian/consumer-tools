@@ -1,0 +1,226 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-04-30T00:20:00Z",
+  "rules": [
+    {
+      "id": "SR_FIN_001",
+      "category": "finance",
+      "description": "Monthly bank statements and account summaries",
+      "match": {
+        "subject_keywords": ["statement", "account summary", "e-statement"],
+        "sender_fragments": ["banking", "account"]
+      },
+      "action": "PROTECT",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_FIN_002",
+      "category": "finance",
+      "description": "Fraud alerts and suspicious activity",
+      "match": {
+        "subject_keywords": ["fraud", "suspicious", "unauthorized", "urgent alert"],
+        "sender_fragments": ["security", "fraud", "alerts"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_SEC_001",
+      "category": "security",
+      "description": "Two-factor authentication and OTP codes",
+      "match": {
+        "subject_keywords": ["verification code", "otp", "2fa", "security code", "one-time password"],
+        "sender_fragments": ["no-reply", "security", "auth"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_SEC_002",
+      "category": "security",
+      "description": "Password reset requests",
+      "match": {
+        "subject_keywords": ["password reset", "forgot password", "reset your password"],
+        "sender_fragments": ["support", "account", "security"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_LEG_001",
+      "category": "legal",
+      "description": "Legal notices and privacy policy updates",
+      "match": {
+        "subject_keywords": ["legal notice", "privacy policy", "terms of service", "updated terms"],
+        "sender_fragments": ["legal", "compliance", "privacy"]
+      },
+      "action": "PROTECT",
+      "risk_level": "medium"
+    },
+    {
+      "id": "SR_GOV_001",
+      "category": "government",
+      "description": "Tax related communications (IRS, State)",
+      "match": {
+        "subject_keywords": ["tax return", "irs", "1099", "w-2", "tax document"],
+        "sender_fragments": [".gov", "tax", "revenue"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_MED_001",
+      "category": "healthcare",
+      "description": "Medical appointment reminders",
+      "match": {
+        "subject_keywords": ["appointment reminder", "visit confirmation", "doctor"],
+        "sender_fragments": ["health", "clinic", "hospital", "mychart"]
+      },
+      "action": "PROTECT",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_MED_002",
+      "category": "healthcare",
+      "description": "Prescription and lab results",
+      "match": {
+        "subject_keywords": ["lab result", "prescription", "refill", "test results"],
+        "sender_fragments": ["pharmacy", "lab", "results"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_INF_001",
+      "category": "infrastructure",
+      "description": "Cloud service downtime or critical billing",
+      "match": {
+        "subject_keywords": ["downtime", "outage", "billing failure", "suspended", "service alert"],
+        "sender_fragments": ["aws", "azure", "google-cloud", "digitalocean", "linode"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_EMP_001",
+      "category": "employment",
+      "description": "Payroll and benefits information",
+      "match": {
+        "subject_keywords": ["payslip", "paystub", "w-2", "benefits", "payroll"],
+        "sender_fragments": ["hr", "payroll", "workday", "adp"]
+      },
+      "action": "PROTECT",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_TRA_001",
+      "category": "travel",
+      "description": "Flight changes and boarding passes",
+      "match": {
+        "subject_keywords": ["boarding pass", "flight update", "gate change", "delayed", "cancelled"],
+        "sender_fragments": ["airline", "delta", "united", "southwest", "american"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_UTI_001",
+      "category": "utilities",
+      "description": "Utility bill and service alerts",
+      "match": {
+        "subject_keywords": ["bill ready", "past due", "disconnection", "outage alert"],
+        "sender_fragments": ["utility", "power", "water", "electric"]
+      },
+      "action": "PROTECT",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_EDU_001",
+      "category": "education",
+      "description": "Tuition and enrollment deadlines",
+      "match": {
+        "subject_keywords": ["tuition", "enrollment", "registration", "financial aid"],
+        "sender_fragments": [".edu", "registrar", "bursar"]
+      },
+      "action": "PROTECT",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_SEC_003",
+      "category": "security",
+      "description": "New device or location login alert",
+      "match": {
+        "subject_keywords": ["new sign-in", "login from new", "unrecognized device"],
+        "sender_fragments": ["security", "account", "no-reply"]
+      },
+      "action": "PROTECT",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_HOA_001",
+      "category": "housing",
+      "description": "HOA or Rent payments",
+      "match": {
+        "subject_keywords": ["rent due", "hoa fee", "lease", "eviction", "maintenance"],
+        "sender_fragments": ["property", "leasing", "management"]
+      },
+      "action": "PROTECT",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_INS_001",
+      "category": "insurance",
+      "description": "Insurance policy changes or claims",
+      "match": {
+        "subject_keywords": ["claim update", "policy renewal", "insurance card"],
+        "sender_fragments": ["insurance", "claims", "policy"]
+      },
+      "action": "PROTECT",
+      "risk_level": "medium"
+    },
+    {
+      "id": "SR_SHP_001",
+      "category": "shipping",
+      "description": "Package delivery requiring signature",
+      "match": {
+        "subject_keywords": ["signature required", "delivery attempt", "out for delivery"],
+        "sender_fragments": ["fedex", "ups", "dhl", "usps"]
+      },
+      "action": "PROTECT",
+      "risk_level": "medium"
+    },
+    {
+      "id": "SR_NET_001",
+      "category": "network",
+      "description": "Domain expiration and DNS alerts",
+      "match": {
+        "subject_keywords": ["expiration notice", "renew your domain", "dns alert"],
+        "sender_fragments": ["registrar", "namecheap", "godaddy", "cloudflare"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "critical"
+    },
+    {
+      "id": "SR_AUT_001",
+      "category": "automotive",
+      "description": "Vehicle recall or safety notices",
+      "match": {
+        "subject_keywords": ["recall notice", "safety alert", "urgent service"],
+        "sender_fragments": ["service", "safety", "recall"]
+      },
+      "action": "PROTECT",
+      "risk_level": "high"
+    },
+    {
+      "id": "SR_CON_001",
+      "category": "legal",
+      "description": "Contract signing requests (DocuSign)",
+      "match": {
+        "subject_keywords": ["please sign", "document ready", "signature requested"],
+        "sender_fragments": ["docusign", "hellosign", "adobesign", "echosign"]
+      },
+      "action": "FORCE_KEEP",
+      "risk_level": "high"
+    }
+  ]
+}

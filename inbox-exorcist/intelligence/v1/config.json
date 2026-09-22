@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-04-30T00:20:00Z",
+  "engine_settings": {
+    "junk_threshold": -40,
+    "keep_threshold": 30,
+    "uncertainty_buffer": 10,
+    "safety_override_enabled": true,
+    "edge_case_enabled": true,
+    "default_base_score": 0,
+    "score_clamping": {
+      "min": -100,
+      "max": 100
+    }
+  },
+  "weight_modifiers": {
+    "category_multipliers": {
+      "security": 2.5,
+      "transactional": 1.5,
+      "finance": 2.0,
+      "legal": 1.8,
+      "promotional": 0.5,
+      "social": 0.7,
+      "system": 0.9
+    },
+    "header_weights": {
+      "list_unsubscribe_exists": -10,
+      "is_personalized": 15,
+      "thread_index_exists": 25,
+      "priority_urgent": 30
+    }
+  },
+  "auto_actions": {
+    "immediate_junk_below": -80,
+    "immediate_keep_above": 90,
+    "flag_for_review_range": [-40, 30]
+  }
+}
