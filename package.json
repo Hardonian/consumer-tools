@@ -1,0 +1,19 @@
+{
+  "name": "consumer-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Unified consumer protection tools: warranty tracking, review intelligence, and email cleanup",
+  "workspaces": [
+    "warranty-weasel",
+    "review-radar",
+    "inbox-exorcist"
+  ],
+  "scripts": {
+    "dev:warranty": "pnpm --filter warranty-weasel dev",
+    "dev:reviews": "pnpm --filter review-radar dev",
+    "dev:inbox": "pnpm --filter inbox-exorcist dev",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "build": "pnpm -r build"
+  }
+}
