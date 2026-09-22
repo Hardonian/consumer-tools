@@ -1,0 +1,39 @@
+{
+  "name": "review-raven",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "@reviewraven/shared-core": "file:packages/shared-core",
+    "@reviewraven/shared-intelligence": "file:packages/shared-intelligence",
+    "@reviewraven/shared-diagnostics": "file:packages/shared-diagnostics",
+    "@reviewraven/shared-cost-control": "file:packages/shared-cost-control",
+    "@reviewraven/shared-infra": "file:packages/shared-infra",
+    "next": "^16.3.3",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^6.0.5",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^10.9.1",
+    "eslint-config-next": "^16.3.4",
+    "jsdom": "^24.1.0",
+    "postcss": "^8.5.23",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.11"
+  }
+}
